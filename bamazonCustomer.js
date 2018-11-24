@@ -71,16 +71,17 @@ function placeOrder() {
   }
 
  function checkStock(id, quantity){
-   console.log(id)
+
 
     var query = "SELECT stock_quantity, price, product_sales FROM products WHERE ?";
     connection.query(query, {item_id: id}, function(err, res) {
 
       var stock = res[0].stock_quantity
       var price = res[0].price
-      var ps = res[0].product_salesnode
+      var ps = res[0].product_sales
 
       if(stock < quantity){
+
           console.log("Insufficient stock. We only have "+stock+" of your chosen item in stock.")
       }
       else{
@@ -99,19 +100,22 @@ function placeOrder() {
     var cost = (price*quantity)
     var newps = (cost+ps)
 
- 
         var query = connection.query(
           "UPDATE products SET ? WHERE ?",
           [
             {
               stock_quantity: newq,
               product_sales: newps
+
             },
             {
               item_id: id
             }
           ],
+
           function(err, res) {
+          
+
             console.log("Your order has been placed. Your outstanding balance is $"+cost)
 
             
@@ -119,5 +123,4 @@ function placeOrder() {
         );
       
       }
-
 

@@ -131,7 +131,7 @@ function update(id, stock, add){
       "UPDATE products SET ? WHERE ?",
       [
         {
-          stock_quantity: +newq
+          stock_quantity: newq
         },
         {
           item_id: id
