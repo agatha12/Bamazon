@@ -49,7 +49,7 @@ function productSales(){
 
 
 
-    var query = "SELECT departments.department_id, departments.department_name, departments.over_head_costs, products.product_sales FROM products INNER JOIN departments ON department=department_name GROUP BY department";
+    var query = "SELECT departments.department_id, departments.department_name, departments.over_head_costs, sum(products.product_sales) as product_sales FROM departments INNER JOIN products ON department_name=department GROUP BY department";
     connection.query(query, function(err, res) {
 
      table = new Table({
